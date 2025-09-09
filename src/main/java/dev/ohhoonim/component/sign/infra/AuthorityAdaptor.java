@@ -1,8 +1,11 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.infra;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import dev.ohhoonim.component.sign.Authority;
+import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
 
 @Component
 public class AuthorityAdaptor implements AuthorityPort{

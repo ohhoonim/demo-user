@@ -1,4 +1,4 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.api.filter;
 
 import java.util.Collection;
 

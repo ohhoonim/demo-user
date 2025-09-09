@@ -1,4 +1,4 @@
-package dev.ohhoomim;
+package dev.ohhoonim;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +9,6 @@ import org.springframework.modulith.docs.Documenter;
 import dev.ohhoonim.DemoUserApplication;
 
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest(classes = DemoUserApplication.class)
 class DemoUserApplicationTests {
 
 	@Test

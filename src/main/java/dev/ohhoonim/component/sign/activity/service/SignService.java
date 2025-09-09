@@ -1,31 +1,34 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.activity.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dev.ohhoonim.component.sign.Authority;
+import dev.ohhoonim.component.sign.SignUser;
+import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
+import dev.ohhoonim.component.sign.activity.SignActivity;
+import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
+import dev.ohhoonim.component.sign.activity.port.UserPort;
+import dev.ohhoonim.component.sign.infra.SignVo;
+
 @Service("signService")
-public class SignService implements SignUsecase {
+public class SignService implements SignActivity {
 
     private final UserPort userPort;
-    private final BearerTokenUsecase bearerTokenService;
+    private final BearerTokenActivity bearerTokenService;
     private final AuthorityPort authorityPort;
 
     public SignService(UserPort userPort,
             AuthorityPort authorityPort,
-            BearerTokenUsecase bearerTokenService) {
+            BearerTokenActivity bearerTokenService) {
         this.userPort = userPort;
         this.authorityPort = authorityPort;
         this.bearerTokenService = bearerTokenService;
     }
 
     @Override
-    public void signUp(User newUser) {
-        userPort.addUser(newUser);
-    }
-
-    @Override
-    public SignVo signIn(User loginTryUser) {
+    public SignVo signIn(SignUser loginTryUser) {
         var user = userPort.findByUsernamePassword(loginTryUser.name(), loginTryUser.password());
         if (user.isPresent()) {
             return generateTokenVo(user.get().name());
