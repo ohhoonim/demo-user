@@ -1,4 +1,4 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.activity.service;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -13,11 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import dev.ohhoonim.component.sign.Authority;
+import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @Service
-public class BearerTokenService implements BearerTokenUsecase {
+public class BearerTokenService implements BearerTokenActivity {
     Logger log = LoggerFactory.getLogger(BearerTokenService.class);
     private String keyChar = "e3f1a5c79b2d4f8e6a1c3d7f9b0e2a4c5d6f8a9b3c1d7e4f2a6b8c0d9e7f3a1";
     private SecretKey key;

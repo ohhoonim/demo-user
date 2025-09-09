@@ -1,4 +1,4 @@
-package dev.ohhoomim;
+package dev.ohhoonim;
 
 import org.springframework.boot.SpringApplication;
 

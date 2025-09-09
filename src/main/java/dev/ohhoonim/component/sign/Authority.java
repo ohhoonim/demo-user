@@ -1,10 +1,9 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public record Authority(
-    Long id,
-    String authority) implements GrantedAuthority {
+        String authority) implements GrantedAuthority {
 
     @Override
     public String getAuthority() {

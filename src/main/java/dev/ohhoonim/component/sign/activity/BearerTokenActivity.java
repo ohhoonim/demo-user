@@ -1,9 +1,11 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.activity;
 
 import java.util.Date;
 import java.util.List;
 
-public interface BearerTokenUsecase {
+import dev.ohhoonim.component.sign.Authority;
+
+public interface BearerTokenActivity {
 
     String generateAccessToken(String userName, List<Authority> authorities);
 

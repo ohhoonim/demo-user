@@ -1,12 +1,13 @@
-package dev.ohhoonim.component.signJwt;
+package dev.ohhoonim.component.sign.api.filter;
 
 import java.io.IOException;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
+import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,10 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
-    private final BearerTokenUsecase bearerTokenService;
+    private final BearerTokenActivity bearerTokenService;
     private final AuthorityPort authorityPort;
 
-    public BearerAuthenticationFilter(BearerTokenUsecase bearerTokenService,
+    public BearerAuthenticationFilter(BearerTokenActivity bearerTokenService,
             AuthorityPort authorityPort) {
         this.bearerTokenService = bearerTokenService;
         this.authorityPort = authorityPort;
