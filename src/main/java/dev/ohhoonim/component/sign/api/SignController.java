@@ -4,39 +4,48 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.ohhoonim.component.container.Search;
+import dev.ohhoonim.component.container.Vo;
 import dev.ohhoonim.component.sign.SignUser;
+import dev.ohhoonim.component.sign.SignedToken;
 import dev.ohhoonim.component.sign.activity.SignActivity;
-import dev.ohhoonim.component.sign.infra.SignVo;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/sign")
-public class SignController {
+class SignController {
 
     private final SignActivity signService;
 
-    public SignController(SignActivity signService) {
+    SignController(SignActivity signService) {
         this.signService = signService;
     }
 
     @PostMapping("/in")
-    public SignVo login(@RequestParam("username") String username,
-            @RequestParam("password") String password) {
-        var loginUser = new SignUser(username, password);
+    Vo<SignedToken> login(@RequestBody @Valid Search<LoginReq> login) {
+        var req = login.getReq();
+        var loginUser = new SignUser(req.username(), req.password());
         return signService.signIn(loginUser);
     }
 
+    record LoginReq(
+            @NotBlank String username,
+            @NotBlank String password) {
+    }
+
     @PostMapping("/out")
-    public void logout() {
+    void logout() {
 
     }
 
     @GetMapping("/refresh")
-    public SignVo refresh(HttpServletRequest request) {
+    Vo<SignedToken> refresh(HttpServletRequest request) {
         var bearerToken = request.getHeader("Authorization");
         if (!(StringUtils.hasText(bearerToken) &&
                 bearerToken.startsWith("Bearer "))) {
@@ -45,8 +54,8 @@ public class SignController {
         return signService.refresh(bearerToken.substring(7));
     }
 
-    @GetMapping("/{callback}")
-    public String signOutMain(@PathVariable("callback") String callback) {
-        return callback;
+    @GetMapping("/callback/{uri}")
+    String signOutMain(@PathVariable("uri") String uri) {
+        return uri;
     }
 }
