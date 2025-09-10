@@ -1,7 +1,6 @@
 package dev.ohhoonim.component.sign;
 
 import java.util.List;
-import java.util.UUID;
 
 public record SignUser(
         String name,

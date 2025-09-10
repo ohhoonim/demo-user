@@ -2,12 +2,12 @@ package dev.ohhoonim.component.sign.api.filter;
 
 import java.io.IOException;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
-import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,13 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
-    private final BearerTokenActivity bearerTokenService;
-    private final AuthorityPort authorityPort;
-
-    public BearerAuthenticationFilter(BearerTokenActivity bearerTokenService,
-            AuthorityPort authorityPort) {
-        this.bearerTokenService = bearerTokenService;
-        this.authorityPort = authorityPort;
+    private final AuthenticationManager authenticationManager;
+    public BearerAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -33,16 +29,14 @@ public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
         if (token != null) {
             try {
-                var username = bearerTokenService.getUsername(token);
-                var authorities = authorityPort.authoritiesByUsername(username);
-
-                var authentication = new BearerAuthenticationToken(authorities);
-                authentication.setAuthenticated(true);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                Authentication unauthenticatedToken = new BearerAuthenticationToken(token);
+                Authentication authenticatedToken = authenticationManager.authenticate(unauthenticatedToken);
+                SecurityContextHolder.getContext().setAuthentication(authenticatedToken);
             } catch (Exception e) {
-                throw new RuntimeException("유효하지 않은 토큰입니다");
+                SecurityContextHolder.clearContext();
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token.");
+                return; 
             }
-
         }
 
         chain.doFilter(request, response);

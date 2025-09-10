@@ -7,21 +7,32 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class BearerAuthenticationToken extends AbstractAuthenticationToken{
 
-    public BearerAuthenticationToken(Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
+    private final Object principal;
+    private final String credentials;
+
+    public BearerAuthenticationToken(String credentials) {
+        // 인증 전에는 권한이 없으므로 null을 전달
+        super(null);
+        this.principal = null;
+        this.credentials = credentials;
+        setAuthenticated(false);
     }
 
+    public BearerAuthenticationToken(Object principal, String credentials, Collection<? extends GrantedAuthority> authorities) {
+        super(authorities);
+        this.principal = principal;
+        this.credentials = credentials;
+    }
 
     @Override
     public Object getPrincipal() {
-        // TODO 
-        return "matthew";
+        return this. principal;
     }
 
 
     @Override
     public Object getCredentials() {
-        return null;
+        return credentials;
     }
     
 }

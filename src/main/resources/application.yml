@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /api
 spring:
   application:
     name: demo-user
@@ -30,3 +33,7 @@ mybatis:
 attachFile:
   upload-path: /demo-attach
   max-attach-files: 5
+
+jwt:
+  key: "e3f1a5c79b2d4f8e6a1c3d7f9b0e2a4c5d6f8a9b3c1d7e4f2a6b8c0d9e7f3a1"
+  zone-offset: "+09:00"
