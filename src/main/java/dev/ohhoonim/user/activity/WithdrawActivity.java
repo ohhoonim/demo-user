@@ -1,0 +1,20 @@
+package dev.ohhoonim.user.activity;
+
+public interface WithdrawActivity {
+    
+}
+/*
+```plantuml
+@startuml
+
+title 회원 탈퇴
+
+start
+:인사 시스템으로부터 퇴사자 정보 수신 (배치);
+:해당 퇴사자의 계정 정보 조회;
+:계정 상태를 '비활성화'로 변경;
+:계정 활성화/비활성화 로그 기록;
+stop
+@enduml
+```
+ */
