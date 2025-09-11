@@ -19,3 +19,6 @@ else (아니오)
 endif
 @enduml
 ```
+
+- 정상 계정 여부 확인 엑션만 구현하고 나머지는 sign 컴포넌트에 위임
+- access control 정보도 제공해주어야 함 Authority

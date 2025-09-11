@@ -14,13 +14,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AccountStatus implements Entity {
 
-    private Id signUserId;
+    private User signUserId;
     private boolean enabled;
     private boolean locked;
     private int failedAttemptCount;
 
     @Override
     public Id getId() {
-        return this.signUserId;
+        return this.signUserId.getId();
     }
 }
