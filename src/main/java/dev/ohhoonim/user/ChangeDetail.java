@@ -14,9 +14,9 @@ import lombok.Setter;
 public class ChangeDetail implements Entity {
 
     private Id changeDetailId;
-    private Id pendingChangeId;
-    private SignUserAttribute oldValue;
-    private SignUserAttribute newValue;
+    private String attributeName;
+    private UserAttribute oldValue;
+    private UserAttribute newValue;
 
     @Override
     public Id getId() {

@@ -12,10 +12,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUserAttribute implements Entity {
+public class UserAttribute implements Entity {
 
     private Id attributeId;
-    private Id signUserId;
     private String name;
     private String value;
 

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUser implements Entity {
+public class User implements Entity {
 
     private Id userId;
     private String username;
@@ -26,7 +26,7 @@ public class SignUser implements Entity {
     private String contact;
     private AccountStatus accountStatus;
 
-    private List<SignUserAttribute> attributes;
+    private List<UserAttribute> attributes;
     private List<PendingChange> pendingChanges;
 
     @Override

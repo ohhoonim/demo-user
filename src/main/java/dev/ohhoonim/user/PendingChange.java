@@ -17,7 +17,7 @@ import lombok.Setter;
 public class PendingChange implements Entity {
 
     private Id pendingChangeId;
-    private Id userId;
+    private User userId;
     private String changeType;
     private LocalDateTime effectiveDate;
     private String status;
