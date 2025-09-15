@@ -1,8 +1,10 @@
 package dev.ohhoonim.user.activity;
 
+import dev.ohhoonim.user.User;
+
 public interface LoginActivity {
     
-    Boolean isValidUser(String username, String passord);
+    User isValidUser(String username, String passord);
 
     
 }

@@ -1,7 +1,18 @@
 package dev.ohhoonim.user.activity;
 
+import java.time.LocalDateTime;
+
+import dev.ohhoonim.user.User;
+
 public interface DormantActivity {
     
+    UserLockStatus deactivateDormantUser(User userId, boolean isDormant);
+
+    int increaseFailedAttemptCount(User userId);
+
+    LocalDateTime lastLogin(User userId);
+
+    void batchDormantUser();
 }
 /*
 
@@ -12,10 +23,10 @@ title 휴면 계정 관리 (시스템 자동화)
 
 start
 :정기적인 스케줄러 실행 (매일/매주);
-:모든 사용자 계정 정보 조회;
+:모든 사용자 계정 정보 조회(ViewInfoActivity);
 :각 계정의 최종 로그인 기록 확인;
 if (최종 로그인 기록이 3개월을 초과했는가?) then (예)
-  :계정 상태를 '잠금'으로 변경;
+  :계정 상태를 '잠금'으로 변경(LockActivity);
   :휴면 계정으로 처리되었음을 사용자에게 이메일로 발송;
   :로그 기록: '휴면 계정 잠금 처리됨';
   stop

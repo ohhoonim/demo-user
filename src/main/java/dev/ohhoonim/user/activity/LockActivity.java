@@ -1,7 +1,12 @@
 package dev.ohhoonim.user.activity;
 
+import java.time.LocalDateTime;
+
+import dev.ohhoonim.user.User;
+
 public interface LockActivity {
     
+    UserLockStatus modifyLock(User userId, boolean isLock, LocalDateTime effectiveDate);
 }
 
 /*

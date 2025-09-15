@@ -1,7 +1,24 @@
 package dev.ohhoonim.user.activity;
 
+import java.io.File;
+import java.util.List;
+
+import dev.ohhoonim.user.User;
+
 public interface BatchRegisterActivity {
     
+    void batchRegister(List<User> users);
+
+    List<User> translateCsvToUsers(File csv);
+
+    List<User> translateExcelToUsers(File excel);
+
+    List<User> fetchHrSystem();
+
+    // translateCsvToUsers, tranlateExcelToUsers
+    // fetchHrSystem 실행 후
+    // 
+    // batchRegister 메서드 수행
 }
 /*
 
@@ -20,7 +37,7 @@ start
 :업로드 버튼 클릭;
 :파일 유효성 검사 및 데이터 파싱;
 :파싱된 계정 정보 데이터베이스에 저장;
-:계정정보 조회 목록에 업로드된 데이터 표시;
+:계정정보 조회 목록에 업로드된 데이터 표시(ViewInfoActivity);
 stop
 @enduml
 ```

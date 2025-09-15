@@ -29,6 +29,10 @@ public class User implements Entity {
     private List<UserAttribute> attributes;
     private List<PendingChange> pendingChanges;
 
+    public User(Id newId) {
+        this.userId = newId;
+    }
+
     @Override
     public Id getId() {
         return this.userId;

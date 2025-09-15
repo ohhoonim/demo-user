@@ -1,7 +1,10 @@
 package dev.ohhoonim.user.activity;
 
+import dev.ohhoonim.user.User;
+
 public interface ActivateActivity {
-    
+   
+  UserEnableStatus changeAccountStatus(User userId, boolean isEnable);
 }
 
 /*
@@ -13,7 +16,7 @@ title 계정 활성화 / 비활성화
 start
 :로그인 성공;
 :내비게이션 바에서 '사용자 관리' 메뉴 선택;
-:사용자 목록 페이지로 이동;
+:사용자 목록 페이지로 이동 (ViewInfoActivity);
 :활성화/비활성화할 계정 선택;
 if (계정 현재 상태 == 활성화?) then (예)
   :비활성화 버튼 클릭;

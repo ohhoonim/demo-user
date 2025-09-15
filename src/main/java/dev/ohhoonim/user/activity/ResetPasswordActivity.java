@@ -1,6 +1,13 @@
 package dev.ohhoonim.user.activity;
 
+import dev.ohhoonim.user.User;
+
 public interface ResetPasswordActivity {
+
+	void verifyPassword(User userId, String inputPassword);
+
+	void resetPassword(String oldPassword, String newPassword);
+
     
 }
 
