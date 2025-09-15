@@ -1,6 +1,10 @@
 package dev.ohhoonim.user.activity;
 
+import dev.ohhoonim.user.User;
+
 public interface RegisterActivity {
+
+    void register(User user);
     
 }
 /*

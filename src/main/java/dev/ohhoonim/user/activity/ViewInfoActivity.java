@@ -1,7 +1,20 @@
 package dev.ohhoonim.user.activity;
 
+import java.util.List;
+
+import dev.ohhoonim.component.container.Search;
+import dev.ohhoonim.component.container.Vo;
+import dev.ohhoonim.user.User;
+import dev.ohhoonim.user.UserAttribute;
+
 public interface ViewInfoActivity {
-    
+
+    Vo<List<User>> users(Search condition);
+
+    User userInfo(User userId);
+
+    // Authorization에 사용될 사용자 속성
+    Vo<List<UserAttribute>> userAttributes(User userId);
 }
 
 /*
@@ -37,7 +50,7 @@ start
 
 if (비밀번호 초기화 필요한가?) then (예)
   :비밀번호 초기화 버튼 클릭;
-  :초기화 링크 생성 및 해당 사용자의 이메일로 발송;
+  :초기화 링크 생성 및 해당 사용자의 이메일로 발송(ResetPasswordActivity);
   :메시지 ("이메일로 초기화 링크를 발송했습니다") 표시;
   stop
 else (아니오)
