@@ -9,12 +9,9 @@ import dev.ohhoonim.user.UserAttribute;
 
 public interface ViewInfoActivity {
 
-    Vo<List<User>> users(Search condition);
+    Vo<List<User>> users(Search<UserReq> condition);
 
-    User userInfo(User userId);
-
-    // Authorization에 사용될 사용자 속성
-    Vo<List<UserAttribute>> userAttributes(User userId);
+    User userInfo(User username);
 }
 
 /*

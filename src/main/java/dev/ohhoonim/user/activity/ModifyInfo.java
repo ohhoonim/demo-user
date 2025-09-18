@@ -5,13 +5,6 @@ import dev.ohhoonim.user.User;
 public interface ModifyInfo {
 
     void modifyInfo(User userInfo);
-
-    void addAttributes(User userInfo, String newAttribute, String newValue);
-
-    void modifyAttribute(User userInfo, String attributeName, String newValue);
-
-    void removeAttribute(User userInfo, String targetAttribute);
-
 }
 /*
 

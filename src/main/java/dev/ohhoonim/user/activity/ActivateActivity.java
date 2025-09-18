@@ -4,7 +4,7 @@ import dev.ohhoonim.user.User;
 
 public interface ActivateActivity {
    
-  UserEnableStatus changeAccountStatus(User userId, boolean isEnable);
+  UserEnableStatus modifyActivate(User userId, boolean isEnable);
 }
 
 /*
