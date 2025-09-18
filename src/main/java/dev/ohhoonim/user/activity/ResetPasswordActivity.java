@@ -4,9 +4,9 @@ import dev.ohhoonim.user.User;
 
 public interface ResetPasswordActivity {
 
-	void verifyPassword(User userId, String inputPassword);
+	boolean verifyPassword(User username, String inputPassword);
 
-	void resetPassword(String oldPassword, String newPassword);
+	void resetPassword(User username, String oldPassword, String newPassword);
 
     
 }

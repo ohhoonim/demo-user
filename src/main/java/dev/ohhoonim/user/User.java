@@ -33,6 +33,10 @@ public class User implements Entity {
         this.userId = newId;
     }
 
+    public User(String username) {
+        setUsername(username);
+    }
+
     @Override
     public Id getId() {
         return this.userId;

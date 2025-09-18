@@ -4,7 +4,7 @@ import dev.ohhoonim.user.User;
 
 public interface WithdrawActivity {
     
-    void withdrawUser(User userId);
+    void withdrawUser(User user);
 }
 /*
 ```plantuml

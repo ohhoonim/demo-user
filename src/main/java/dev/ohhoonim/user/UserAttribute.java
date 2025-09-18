@@ -22,4 +22,9 @@ public class UserAttribute implements Entity {
     public Id getId() {
         return this.attributeId;
     }
+
+    public UserAttribute(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
 }

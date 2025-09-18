@@ -6,7 +6,7 @@ import dev.ohhoonim.user.User;
 
 public interface LockActivity {
     
-    UserLockStatus modifyLock(User userId, boolean isLock, LocalDateTime effectiveDate);
+    UserLockStatus modifyLock(User username, boolean isLock, LocalDateTime effectiveDate);
 }
 
 /*
