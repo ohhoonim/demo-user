@@ -7,18 +7,14 @@ import dev.ohhoonim.user.User;
 
 public interface BatchRegisterActivity {
     
-    void batchRegister(List<User> users);
+    int batchRegister(List<User> users);
 
     List<User> translateCsvToUsers(File csv);
 
     List<User> translateExcelToUsers(File excel);
 
-    List<User> fetchHrSystem();
+    int fetchHrSystemToPendingChange();
 
-    // translateCsvToUsers, tranlateExcelToUsers
-    // fetchHrSystem 실행 후
-    // 
-    // batchRegister 메서드 수행
 }
 /*
 

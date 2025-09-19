@@ -1,5 +1,6 @@
 package dev.ohhoonim.user.activity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import dev.ohhoonim.user.PendingChange;
@@ -7,17 +8,10 @@ import dev.ohhoonim.user.User;
 
 public interface BatchUpdateActivity {
 
-    void batchUpdate(List<User> users);
+    int batchUpdate(List<User> users);
 
-    // 연동할 시스템의 데이터를 pendingChange로 우선 등록
-    // 이 후에 effectiveDate를 체크하여 batchUpdate 실행하여
-    // User 데이터를 변경
-    List<PendingChange> registPendingChanges (User userId);
+    int applyPendingChangesToUser(LocalDateTime effectiveDate);
 
-    // 활성화 여부 : ActivateActivity
-    // 잠금 여부 : LockActivity
-
-    // 스케쥴러는 별도 controller에 세팅
 }
 /*
 
