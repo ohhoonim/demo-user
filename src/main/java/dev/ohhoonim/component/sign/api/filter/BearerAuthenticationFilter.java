@@ -12,14 +12,13 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 
+@RequiredArgsConstructor
 public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
     private final AuthenticationManager authenticationManager;
-    public BearerAuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

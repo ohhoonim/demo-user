@@ -11,17 +11,14 @@ import org.springframework.stereotype.Component;
 
 import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
 import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class BearerAuthenticationProvider implements AuthenticationProvider {
     
     private final BearerTokenActivity bearerTokenService;
     private final AuthorityPort authorityPort;
-
-    public BearerAuthenticationProvider(BearerTokenActivity bearerTokenService, AuthorityPort authorityPort) {
-        this.bearerTokenService = bearerTokenService;
-        this.authorityPort = authorityPort;
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

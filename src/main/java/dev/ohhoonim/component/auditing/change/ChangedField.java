@@ -5,23 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class ChangedField implements BiFunction<Object, Object, String> {
 
-    Logger log = LoggerFactory.getLogger(getClass());
-
-    private ObjectMapper objectMapper;
-
-    public ChangedField(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
+    private final ObjectMapper objectMapper;
 
     @Override
     public String apply(Object oldObject, Object newObject) {

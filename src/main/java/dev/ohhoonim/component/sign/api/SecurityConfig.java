@@ -15,16 +15,14 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import dev.ohhoonim.component.sign.api.filter.BearerAuthenticationFilter;
 import dev.ohhoonim.component.sign.api.filter.BearerAuthenticationProvider;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
 	private final BearerAuthenticationProvider bearerAuthenticationProvider;
-
-	public SecurityConfig(BearerAuthenticationProvider bearerAuthenticationProvider) {
-		this.bearerAuthenticationProvider = bearerAuthenticationProvider;
-	}
 
 	@Bean
 	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
