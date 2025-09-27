@@ -16,16 +16,14 @@ import dev.ohhoonim.component.sign.activity.SignActivity;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/sign")
+@RequiredArgsConstructor
 class SignController {
 
     private final SignActivity signService;
-
-    SignController(SignActivity signService) {
-        this.signService = signService;
-    }
 
     @PostMapping("/in")
     Vo<SignedToken> login(@RequestBody @Valid Search<LoginReq> login) {

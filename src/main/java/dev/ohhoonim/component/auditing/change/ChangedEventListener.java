@@ -1,23 +1,17 @@
 package dev.ohhoonim.component.auditing.change;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import dev.ohhoonim.component.auditing.dataBy.Entity;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class ChangedEventListener {
-
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final ChangedEventRepository<?> repository;
 
-    public ChangedEventListener(ChangedEventRepository<?> changedEventRepository) {
-        this.repository= changedEventRepository;
-    }
-    
     @EventListener
     public void changedEvent(ChangedEvent<? extends Entity> event) {
         switch (event) {

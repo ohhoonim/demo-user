@@ -27,19 +27,16 @@ import dev.ohhoonim.user.activity.UserReq;
 import dev.ohhoonim.user.activity.ViewInfoActivity;
 import dev.ohhoonim.user.activity.WithdrawActivity;
 import dev.ohhoonim.user.activity.port.UserPort;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements ActivateActivity, DormantActivity,
         LockActivity, LoginActivity, ModifyInfo, RegisterActivity, ResetPasswordActivity,
         ViewInfoActivity, WithdrawActivity {
 
     private final UserPort userPort;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserPort userPort, PasswordEncoder passwordEncoder) {
-        this.userPort = userPort;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public User isValidUser(String username, String password) {

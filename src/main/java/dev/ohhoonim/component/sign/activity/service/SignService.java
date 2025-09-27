@@ -14,21 +14,15 @@ import dev.ohhoonim.component.sign.activity.BearerTokenActivity;
 import dev.ohhoonim.component.sign.activity.SignActivity;
 import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
 import dev.ohhoonim.component.sign.activity.port.SignUserPort;
+import lombok.RequiredArgsConstructor;
 
 @Service("signService")
+@RequiredArgsConstructor
 class SignService implements SignActivity {
 
     private final SignUserPort signUserPort;
-    private final BearerTokenActivity bearerTokenService;
     private final AuthorityPort authorityPort;
-
-    SignService(SignUserPort signUserPort,
-            AuthorityPort authorityPort,
-            BearerTokenActivity bearerTokenService) {
-        this.signUserPort = signUserPort;
-        this.authorityPort = authorityPort;
-        this.bearerTokenService = bearerTokenService;
-    }
+    private final BearerTokenActivity bearerTokenService;
 
     @Override
     public Vo<SignedToken> signIn(SignUser loginTryUser) {

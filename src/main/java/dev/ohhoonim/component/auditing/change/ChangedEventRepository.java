@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.postgresql.util.PGobject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -21,19 +19,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
+@RequiredArgsConstructor
+@Slf4j
 public class ChangedEventRepository<T extends Entity> {
 
-    Logger log = LoggerFactory.getLogger(getClass());
-
     private final JdbcClient jdbcClient;
-    private ObjectMapper objectMapper;
-
-    public ChangedEventRepository(JdbcClient jdbcClient, ObjectMapper objectMapper) {
-        this.jdbcClient = jdbcClient;
-        this.objectMapper = objectMapper;
-    }
 
     public void recordingChangedData(ChangedEvent<T> event) {
         if (event == null || event.getEntityId() == null) {
@@ -55,6 +49,7 @@ public class ChangedEventRepository<T extends Entity> {
         PGobject jsonObject = new PGobject();
         jsonObject.setType("jsonb");
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             jsonObject.setValue(objectMapper.writeValueAsString(json));
         } catch (JsonProcessingException | SQLException e) {
             throw new RuntimeException("jsonb로 만드는 중 에러가 발생함");
