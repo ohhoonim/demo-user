@@ -18,7 +18,7 @@ public interface UserPort {
 
     void changeLock(String username, boolean isLock, LocalDateTime effectiveDate);
 
-    void resetPassword(String username, String newPassword);
+    void resetPassword(String username, String newEncodedPassword);
 
     void registUser(User user);
 

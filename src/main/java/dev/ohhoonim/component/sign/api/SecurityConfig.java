@@ -60,11 +60,6 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
-
-	@Bean
 	public LogoutHandler bearerLogoutHandler() {
 		return (request, response, authentication) -> {
 			// LogoutHandler는 authentication을 자동으로 제거하기 직전에 실행된다.

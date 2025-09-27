@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,7 +18,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Service;
 
+import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Id;
+import dev.ohhoonim.component.auditing.dataBy.Modified;
+import dev.ohhoonim.user.ChangeDetail;
 import dev.ohhoonim.user.PendingChange;
 import dev.ohhoonim.user.User;
 import dev.ohhoonim.user.UserAttribute;
@@ -24,21 +29,15 @@ import dev.ohhoonim.user.activity.BatchRegisterActivity;
 import dev.ohhoonim.user.activity.BatchUpdateActivity;
 import dev.ohhoonim.user.activity.port.HrClient;
 import dev.ohhoonim.user.activity.port.PendingChangePort;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserBatchService implements BatchRegisterActivity, BatchUpdateActivity {
 
     private final UserService userService;
     private final PendingChangePort pendingChangePort;
     private final HrClient hrClient;
-
-    public UserBatchService(UserService userService,
-            PendingChangePort pendingChangePort,
-            HrClient hrClient) {
-        this.userService = userService;
-        this.pendingChangePort = pendingChangePort;
-        this.hrClient = hrClient;
-    }
 
     @Override
     public int batchUpdate(List<User> users) {
@@ -54,14 +53,32 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
         return addedCount;
     }
 
+    /**
+     * 연계시스템에서 불러온 데이터를 pendingchange, detail에 저장
+     */
     @Override
     public int fetchHrSystemToPendingChange() {
         // FIXME 연동시스템 있을시 여기에 코드 추가
 
-        // hrClient.fetchHrUsers();
+        // pseudo code 
+        // var fetchUsers = hrClient.fetchHrUsers();
+        // var convertedPendingChanges = fetchUsers.stream().map().toList()
+        // addPendingChange
+        // if (convertedPendingChanges.getChangeDetail() != null)
+        // loop
+        //      addChangeDetail(changeDetail)
+
+        pendingChangePort.addPending(new PendingChange());
+
+        pendingChangePort.addChangeDetail(new ChangeDetail());
+
         return 0;
     }
 
+    /**
+     * pending에 저장되어있던 데이터를 특정 일시(effectiveDate)에
+     * User 데이터에 반영
+     */
     @Override
     public int applyPendingChangesToUser(LocalDateTime effectiveDate) {
         List<PendingChange> pendings = pendingChangePort.pendings(effectiveDate);
@@ -69,16 +86,17 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
         int count = 0;
         for (var pending : pendings) {
             try {
-                var user = pending.getUserId();
-                var userAttribute = pending.getChangeDetails().stream().map(detail -> {
-                    return new UserAttribute(
-                            null,
-                            detail.getNewValue().getName(),
-                            detail.getNewValue().getValue());
-                }).toList();
-
-                user.setAttributes(userAttribute);
-                userService.modifyInfo(user);
+                if (pending.getUser().getUserId() == null) {
+                    var user = pending.getUser();
+                    var userAttribute = makeAttribute.apply(pending, user);
+                    user.setAttributes(userAttribute);
+                    userService.register(user);
+                } else {
+                    var user = pending.getUser();
+                    var userAttribute = makeAttribute.apply(pending, user);
+                    user.setAttributes(userAttribute);
+                    userService.modifyInfo(user);
+                }
                 count++;
             } catch (Exception e) {
                 continue;
@@ -87,6 +105,22 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
         return count;
     }
 
+    private BiFunction<PendingChange, User, List<UserAttribute>> makeAttribute = (pending, user) -> {
+        return pending.getChangeDetails().stream().map(detail -> {
+            return new UserAttribute(
+                    null,
+                    user,
+                    detail.getAttributeName(),
+                    detail.getNewValue(),
+                    new Created(),
+                    new Modified());
+        }).toList();
+    };
+
+    /**
+     * cvs, excel 로 업로드된 데이터를 이용하여 사용자 등록할 때 사용
+     * 중복체크하지 않으므로 시스템 초기 사용자 설정시에만 사용하도록 주의
+     */
     @Override
     public int batchRegister(List<User> users) {
         int count = 0;
@@ -167,7 +201,6 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
         if (cell == null) {
             return "";
         }
-        // 셀의 타입에 따라 값을 읽습니다.
         switch (cell.getCellType()) {
             case STRING:
                 return cell.getStringCellValue();
@@ -176,7 +209,6 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
             case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
             case FORMULA:
-                // 수식 셀을 처리할 수 있습니다.
                 return cell.getCellFormula();
             default:
                 return "";

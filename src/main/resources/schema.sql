@@ -82,7 +82,8 @@ create table if not exists system_domain_user_attribute (
 
 create table if not exists system_domain_user_pending_change (
     pending_change_id varchar(26),
-    user_id varchar(26) not null,
+    user_id varchar(26) ,
+    username varchar(255) not null,
     change_type varchar(10),
     effective_date timestamp,
     status varchar(10),

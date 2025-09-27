@@ -10,9 +10,15 @@ import dev.ohhoonim.component.sign.activity.port.AuthorityPort;
 @Component
 public class AuthorityAdaptor implements AuthorityPort {
 
+    private final UserMapper userMapper;
+
+    public AuthorityAdaptor (UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     @Override
     public List<Authority> authoritiesByUsername(String name) {
-        // TODO Auto-generated method stub
+        // FIXME 메뉴관리 구현할 때 이 부분 채워주세요. resources
         throw new UnsupportedOperationException("Unimplemented method 'authoritiesByUsername'");
     }
 

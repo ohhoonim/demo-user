@@ -9,6 +9,7 @@ public final class Created implements DataBy {
     private Instant created;
 
     public Created() {
+        this.creator = CurrentUser.getUsername();
         this.created = Instant.now();
     }
 

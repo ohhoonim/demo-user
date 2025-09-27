@@ -15,9 +15,9 @@ import lombok.Setter;
 public class AccountStatus implements Entity {
 
     private User signUserId;
-    private boolean enabled;
-    private boolean locked;
-    private int failedAttemptCount;
+    private Boolean enabled;
+    private Boolean locked;
+    private Integer failedAttemptCount;
 
     @Override
     public Id getId() {

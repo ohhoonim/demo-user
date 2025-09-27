@@ -3,6 +3,7 @@ package dev.ohhoonim.user;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import dev.ohhoonim.component.auditing.dataBy.DataBy;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,12 @@ import lombok.Setter;
 public class PendingChange implements Entity {
 
     private Id pendingChangeId;
-    private User userId;
+    private User user;
     private String changeType;
     private LocalDateTime effectiveDate;
     private String status;
+    private DataBy creator;
+    private DataBy modifier;
 
     private List<ChangeDetail> changeDetails;
 

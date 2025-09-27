@@ -9,6 +9,7 @@ public final class Modified implements DataBy {
     private Instant modified;
 
     public Modified() {
+        this.modifier = CurrentUser.getUsername();
         this.modified = Instant.now();
     }
 
