@@ -15,7 +15,7 @@ import lombok.Setter;
 public class UserReq {
     private String username;
     private String name;
-    private boolean enabled;
-    private boolean locked;
+    private Boolean enabled;
+    private Boolean locked;
     private List<UserAttribute> attributes;
 }

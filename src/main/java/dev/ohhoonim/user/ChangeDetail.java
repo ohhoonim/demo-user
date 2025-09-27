@@ -1,5 +1,6 @@
 package dev.ohhoonim.user;
 
+import dev.ohhoonim.component.auditing.dataBy.DataBy;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
 import lombok.AllArgsConstructor;
@@ -14,9 +15,12 @@ import lombok.Setter;
 public class ChangeDetail implements Entity {
 
     private Id changeDetailId;
+    private PendingChange pendingChange;
     private String attributeName;
-    private UserAttribute oldValue;
-    private UserAttribute newValue;
+    private String oldValue;
+    private String newValue;
+    private DataBy creator;
+    private DataBy modifier;
 
     @Override
     public Id getId() {

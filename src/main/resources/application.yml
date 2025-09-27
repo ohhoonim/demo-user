@@ -23,7 +23,7 @@ spring:
       maximum-pool-size: 20
 mybatis:
   mapper-locations: mapper/**/*.xml
-  type-aliases-package: dev.ohhoonim.component
+  type-aliases-package: dev.ohhoonim.component,dev.ohhoonim.user
   type-handlers-package: dev.ohhoonim.component.datasource.handler
   configuration:
     jdbc-type-for-null: other 

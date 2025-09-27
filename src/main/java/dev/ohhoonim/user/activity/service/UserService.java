@@ -7,7 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Id;
+import dev.ohhoonim.component.auditing.dataBy.Modified;
 import dev.ohhoonim.component.container.Search;
 import dev.ohhoonim.component.container.Vo;
 import dev.ohhoonim.user.AccountStatus;
@@ -92,6 +94,9 @@ public class UserService implements ActivateActivity, DormantActivity,
         accountStatus.setLocked(false);
         accountStatus.setFailedAttemptCount(0);
         user.setAccountStatus(accountStatus);
+
+        user.setCreator(new Created());
+        user.setCreator(new Modified());
 
         userPort.registUser(user);
 

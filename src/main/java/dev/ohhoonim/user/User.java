@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import dev.ohhoonim.component.auditing.dataBy.DataBy;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,8 @@ public class User implements Entity {
     private String email;
     private String contact;
     private AccountStatus accountStatus;
+    private DataBy creator;
+    private DataBy modifier;
 
     private List<UserAttribute> attributes;
     private List<PendingChange> pendingChanges;

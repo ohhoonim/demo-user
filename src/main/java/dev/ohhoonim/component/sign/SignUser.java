@@ -9,4 +9,8 @@ public record SignUser(
     public SignUser(String username, String password) {
         this(username, password, null);
     }
+
+    public SignUser(String username) {
+        this(username, null, null);
+    }
 }
