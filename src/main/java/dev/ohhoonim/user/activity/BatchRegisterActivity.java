@@ -1,6 +1,6 @@
 package dev.ohhoonim.user.activity;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import dev.ohhoonim.user.User;
@@ -9,9 +9,9 @@ public interface BatchRegisterActivity {
     
     int batchRegister(List<User> users);
 
-    List<User> translateCsvToUsers(File csv);
+    List<User> translateCsvToUsers(InputStream csv);
 
-    List<User> translateExcelToUsers(File excel);
+    List<User> translateExcelToUsers(InputStream excel);
 
     int fetchHrSystemToPendingChange();
 

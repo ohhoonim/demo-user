@@ -197,7 +197,7 @@ public class UserMapperTest {
         var userReq = new UserReq();
         var users = userMapper.findUsers(userReq, new Page());
 
-        Id lastSeenKey = users.stream().reduce((_, s) -> s)
+        Id lastSeenKey = users.stream().reduce((f, s) -> s)
                 .map(s -> s.getUserId())
                 .orElseGet(() -> null);
         assertThat(lastSeenKey).isInstanceOf(Id.class)

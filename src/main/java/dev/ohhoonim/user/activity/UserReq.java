@@ -1,5 +1,6 @@
 package dev.ohhoonim.user.activity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import dev.ohhoonim.user.UserAttribute;
@@ -17,5 +18,10 @@ public class UserReq {
     private String name;
     private Boolean enabled;
     private Boolean locked;
+    private Boolean isInit;
+    private LocalDateTime effectiveDate;
     private List<UserAttribute> attributes;
+
+    private String password;
+    private String newPassword;
 }

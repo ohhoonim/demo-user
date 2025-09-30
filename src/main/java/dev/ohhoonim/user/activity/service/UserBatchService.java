@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,9 +138,9 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
     }
 
     @Override
-    public List<User> translateCsvToUsers(File csv) {
+    public List<User> translateCsvToUsers(InputStream csv) {
         List<User> users = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(csv))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(csv))) {
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
@@ -164,10 +166,9 @@ public class UserBatchService implements BatchRegisterActivity, BatchUpdateActiv
     }
 
     @Override
-    public List<User> translateExcelToUsers(File excel) {
+    public List<User> translateExcelToUsers(InputStream excel) {
         List<User> users = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream(excel);
-                Workbook workbook = WorkbookFactory.create(fis)) {
+        try (Workbook workbook = WorkbookFactory.create(excel)) {
 
             Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트 
 
