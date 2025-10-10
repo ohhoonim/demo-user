@@ -3,7 +3,6 @@ package dev.ohhoonim.user.activity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import dev.ohhoonim.user.PendingChange;
 import dev.ohhoonim.user.User;
 
 public interface BatchUpdateActivity {
@@ -14,6 +13,7 @@ public interface BatchUpdateActivity {
 
 }
 /*
+
 
 ```plantuml
 @startuml

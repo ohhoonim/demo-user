@@ -5,7 +5,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import dev.ohhoonim.component.auditing.dataBy.Entity;
-import dev.ohhoonim.component.sign.SignUser;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -20,7 +19,7 @@ public class ChangedEventListener {
         switch (event) {
             case CreatedEvent c -> repository.recordingChangedData(c);
             case ModifiedEvent m -> repository.recordingChangedData(m);
-            case LookupEvent l -> new RuntimeException("Not supported event");
+            case LookupEvent _ -> new RuntimeException("Not supported event");
         }
     }
 

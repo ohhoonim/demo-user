@@ -5,7 +5,6 @@ import java.util.List;
 import dev.ohhoonim.component.container.Search;
 import dev.ohhoonim.component.container.Vo;
 import dev.ohhoonim.user.User;
-import dev.ohhoonim.user.UserAttribute;
 
 public interface ViewInfoActivity {
 

@@ -27,7 +27,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestControllerAdvice(basePackages = "dev.ohhoonim")
 public class DefaultResponseHandler implements ResponseBodyAdvice<Object> {
 
-    @SuppressWarnings("null")
     @Override
     public boolean supports(MethodParameter returnType,
             Class<? extends HttpMessageConverter<?>> converterType) {

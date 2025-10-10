@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -59,7 +57,7 @@ public class SecurityConfig {
 
 	@Bean
 	public LogoutHandler bearerLogoutHandler() {
-		return (request, response, authentication) -> {
+		return (_, _, _) -> {
 			// LogoutHandler는 authentication을 자동으로 제거하기 직전에 실행된다.
 			// 여기에 로그아웃 시 필요한 추가 로직을 구현합니다.
 			// 예: JWT 토큰 무효화 (블랙리스트에 추가 또는 캐시에서 제거)

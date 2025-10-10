@@ -83,7 +83,7 @@ public class ChangedEventRepository<T extends Entity> {
 
     }
 
-    private RowMapper<LookupEvent<T>> rowMapper = (rs, rownum) -> {
+    private RowMapper<LookupEvent<T>> rowMapper = (rs, _) -> {
 
         Instant created = rs.getTimestamp("created").toInstant();
         Created creator = new Created(rs.getString("creator"), created);

@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.lang.NonNull;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +25,7 @@ public class UserBatchController {
     private final UserBatchService userBatchService;
 
     @PostMapping("/batchUpdate")
-    public int batchUpdate(@RequestBody @NonNull List<User> users) {
+    public int batchUpdate(@RequestBody List<User> users) {
         return userBatchService.batchUpdate(users);
     }
 
@@ -37,7 +35,7 @@ public class UserBatchController {
     }
 
     @PostMapping("/batchRegister")
-    public int batchRegister(@RequestBody @NonNull List<User> users) {
+    public int batchRegister(@RequestBody List<User> users) {
         return userBatchService.batchRegister(users);
     }
 
