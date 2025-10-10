@@ -13,15 +13,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
 import dev.ohhoonim.component.sign.SignUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @Repository
 @RequiredArgsConstructor
@@ -52,7 +51,7 @@ public class ChangedEventRepository<T extends Entity> {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             jsonObject.setValue(objectMapper.writeValueAsString(json));
-        } catch (JsonProcessingException | SQLException e) {
+        } catch (JacksonException | SQLException e) {
             throw new RuntimeException("jsonb로 만드는 중 에러가 발생함");
         }
         return jsonObject;

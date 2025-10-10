@@ -1,6 +1,5 @@
 package dev.ohhoonim.component.datasource.handler;
 
-import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +10,7 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.postgresql.util.PGobject;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 @MappedJdbcTypes(JdbcType.OTHER)
 public class JsonBTypeHandler<T> extends BaseTypeHandler<T> {
@@ -32,54 +31,38 @@ public class JsonBTypeHandler<T> extends BaseTypeHandler<T> {
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException {
-        try {
-            PGobject jsonObject = new PGobject();
-            jsonObject.setType("jsonb");
-            jsonObject.setValue(objectMapper.writeValueAsString(parameter));
-            ps.setObject(i, jsonObject);
-        } catch (IOException e) {
-            throw new SQLException("Error serializing object to JSON", e);
-        }
+        PGobject jsonObject = new PGobject();
+        jsonObject.setType("jsonb");
+        jsonObject.setValue(objectMapper.writeValueAsString(parameter));
+        ps.setObject(i, jsonObject);
     }
 
     @Override
     public T getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        try {
-            PGobject pgObject = (PGobject) rs.getObject(columnName);
-            if (pgObject != null) {
-                return objectMapper.readValue(pgObject.getValue(), type);
-            }
-            return null;
-        } catch (IOException e) {
-            throw new SQLException("Error deserializing JSON to object", e);
+        PGobject pgObject = (PGobject) rs.getObject(columnName);
+        if (pgObject != null) {
+            return objectMapper.readValue(pgObject.getValue(), type);
         }
+        return null;
     }
 
     // Add other getNullableResult methods here (for columnIndex, CallableStatement)
     @Override
     public T getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        try {
-            PGobject pgObject = (PGobject) rs.getObject(columnIndex);
-            if (pgObject != null) {
-                return objectMapper.readValue(pgObject.getValue(), type);
-            }
-            return null;
-        } catch (IOException e) {
-            throw new SQLException("Error deserializing JSON to object", e);
+        PGobject pgObject = (PGobject) rs.getObject(columnIndex);
+        if (pgObject != null) {
+            return objectMapper.readValue(pgObject.getValue(), type);
         }
+        return null;
     }
 
     @Override
     public T getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        try {
-            PGobject pgObject = (PGobject) cs.getObject(columnIndex);
-            if (pgObject != null) {
-                return objectMapper.readValue(pgObject.getValue(), type);
-            }
-            return null;
-        } catch (IOException e) {
-            throw new SQLException("Error deserializing JSON to object", e);
+        PGobject pgObject = (PGobject) cs.getObject(columnIndex);
+        if (pgObject != null) {
+            return objectMapper.readValue(pgObject.getValue(), type);
         }
+        return null;
     }
 
 }

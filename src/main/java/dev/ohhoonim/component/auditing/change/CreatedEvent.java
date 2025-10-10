@@ -1,11 +1,11 @@
 package dev.ohhoonim.component.auditing.change;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 public final class CreatedEvent<T extends Entity> implements ChangedEvent<T> {
 
@@ -41,7 +41,7 @@ public final class CreatedEvent<T extends Entity> implements ChangedEvent<T> {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.writeValueAsString(entityInstance);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw new RuntimeException("json 변환에 실패하였습니다.");
         }
     }

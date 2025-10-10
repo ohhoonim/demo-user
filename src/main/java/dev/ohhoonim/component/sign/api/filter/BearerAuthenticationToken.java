@@ -12,7 +12,6 @@ public class BearerAuthenticationToken extends AbstractAuthenticationToken{
     private final String credentials;
 
     public BearerAuthenticationToken(String credentials) {
-        // 인증 전에는 권한이 없으므로 null을 전달
         super(Collections.EMPTY_LIST);
         this.principal = null;
         this.credentials = credentials;
