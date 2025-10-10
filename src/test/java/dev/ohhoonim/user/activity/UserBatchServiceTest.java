@@ -16,14 +16,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import dev.ohhoonim.user.ChangeDetail;
-import dev.ohhoonim.user.PendingChange;
-import dev.ohhoonim.user.User;
-import dev.ohhoonim.user.activity.port.HrClient;
-import dev.ohhoonim.user.activity.port.PendingChangePort;
-import dev.ohhoonim.user.activity.port.UserPort;
-import dev.ohhoonim.user.activity.service.UserBatchService;
-import dev.ohhoonim.user.activity.service.UserService;
+import dev.ohhoonim.user.internal.UserBatchService;
+import dev.ohhoonim.user.internal.UserService;
+import dev.ohhoonim.user.model.ChangeDetail;
+import dev.ohhoonim.user.model.PendingChange;
+import dev.ohhoonim.user.model.User;
+import dev.ohhoonim.user.port.HrClient;
+import dev.ohhoonim.user.port.PendingChangePort;
+import dev.ohhoonim.user.port.UserPort;
 
 @ExtendWith(MockitoExtension.class)
 public class UserBatchServiceTest {

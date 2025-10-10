@@ -23,12 +23,12 @@ import dev.ohhoonim.component.auditing.dataBy.Id;
 import dev.ohhoonim.component.auditing.dataBy.Modified;
 import dev.ohhoonim.component.container.Page;
 import dev.ohhoonim.component.sign.api.PasswordConfig;
-import dev.ohhoonim.user.AccountStatus;
-import dev.ohhoonim.user.ChangeDetail;
-import dev.ohhoonim.user.PendingChange;
-import dev.ohhoonim.user.User;
-import dev.ohhoonim.user.UserAttribute;
-import dev.ohhoonim.user.activity.UserReq;
+import dev.ohhoonim.user.application.UserReq;
+import dev.ohhoonim.user.model.AccountStatus;
+import dev.ohhoonim.user.model.ChangeDetail;
+import dev.ohhoonim.user.model.PendingChange;
+import dev.ohhoonim.user.model.User;
+import dev.ohhoonim.user.model.UserAttribute;
 
 @Import(PasswordConfig.class)
 @Testcontainers

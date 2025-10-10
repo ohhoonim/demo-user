@@ -20,15 +20,14 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dev.ohhoonim.component.container.Search;
 import dev.ohhoonim.component.container.Vo;
-import dev.ohhoonim.user.User;
-import dev.ohhoonim.user.activity.UserEnableStatus;
-import dev.ohhoonim.user.activity.UserLockStatus;
-import dev.ohhoonim.user.activity.UserReq;
-import dev.ohhoonim.user.activity.service.UserService;
+import dev.ohhoonim.user.application.UserEnableStatus;
+import dev.ohhoonim.user.application.UserLockStatus;
+import dev.ohhoonim.user.application.UserReq;
+import dev.ohhoonim.user.internal.UserService;
+import dev.ohhoonim.user.model.User;
+import tools.jackson.databind.ObjectMapper;
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
@@ -287,7 +286,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userReq))
                 .assertThat()
-                .hasStatusOk().bodyJson().extractingPath("$.data")
+                .hasStatusOk().bodyJson().extractingPath("$.data").asString()
                 .isEqualTo(UserEnableStatus.Deactiviate.toString());
     }
 }

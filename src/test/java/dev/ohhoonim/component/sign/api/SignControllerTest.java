@@ -11,13 +11,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dev.ohhoonim.component.container.ResponseCode;
 import dev.ohhoonim.component.container.Search;
 import dev.ohhoonim.component.sign.activity.SignActivity;
 import dev.ohhoonim.component.sign.api.SignController.LoginReq;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @WebMvcTest(SignController.class)
 public class SignControllerTest {
@@ -33,7 +32,7 @@ public class SignControllerTest {
 
     @Test
     @WithMockUser
-    void signInTest() throws JsonProcessingException {
+    void signInTest() throws JacksonException {
         var search = new Search<>(
                 new LoginReq(null, null),
                 null);

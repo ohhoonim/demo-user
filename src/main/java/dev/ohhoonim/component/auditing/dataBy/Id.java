@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.github.f4b6a3.ulid.Ulid;
+
+import tools.jackson.databind.util.NamingStrategyImpls;
 
 public final class Id implements DataBy, Serializable {
 
@@ -36,7 +37,7 @@ public final class Id implements DataBy, Serializable {
      */
     public static String entityType(Class<?> clazz) {
         String camel = clazz.getSimpleName();
-        return new PropertyNamingStrategies.SnakeCaseStrategy().translate(camel);
+        return NamingStrategyImpls.SNAKE_CASE.translate(camel);
     }
 
     @JsonValue

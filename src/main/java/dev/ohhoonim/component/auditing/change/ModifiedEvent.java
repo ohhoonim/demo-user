@@ -1,10 +1,9 @@
 package dev.ohhoonim.component.auditing.change;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dev.ohhoonim.component.auditing.dataBy.Created;
 import dev.ohhoonim.component.auditing.dataBy.Entity;
 import dev.ohhoonim.component.auditing.dataBy.Id;
+import tools.jackson.databind.ObjectMapper;
 
 public final class ModifiedEvent<T extends Entity> implements ChangedEvent<T>{
 
