@@ -16,11 +16,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import dev.ohhoonim.component.auditing.dataBy.Id;
 import dev.ohhoonim.user.ChangeDetail;
 import dev.ohhoonim.user.PendingChange;
 import dev.ohhoonim.user.User;
-import dev.ohhoonim.user.UserAttribute;
 import dev.ohhoonim.user.activity.port.HrClient;
 import dev.ohhoonim.user.activity.port.PendingChangePort;
 import dev.ohhoonim.user.activity.port.UserPort;

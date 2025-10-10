@@ -101,8 +101,8 @@ public class UserServiceTest {
         var user = new User(userId);
         user.setUsername("matthew");
         assertThat(user)
-            .extracting(u -> user.getId()).isEqualTo(userId)
-            .extracting(u -> user.getUsername()).isEqualTo("matthew");
+            .extracting(_ -> user.getId()).isEqualTo(userId)
+            .extracting(_ -> user.getUsername()).isEqualTo("matthew");
 
         userService.withdrawUser(user);
 

@@ -3,7 +3,6 @@ package dev.ohhoonim.user.activity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import dev.ohhoonim.component.container.Search;
 import dev.ohhoonim.user.User;
 
 public interface DormantActivity {

@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "attachFile.upload-path",
+    "type": "java.lang.String",
+    "description": "A description for 'attachFile.upload-path'"
+  },
+  {
+    "name": "attachFile.max-attach-files",
+    "type": "java.lang.String",
+    "description": "A description for 'attachFile.max-attach-files'"
+  },
+  {
+    "name": "jwt.zone-offset",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.zone-offset'"
+  },
+  {
+    "name": "jwt.key",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.key'"
+  },
+  {
+    "name": "hr.base-url",
+    "type": "java.lang.String",
+    "description": "A description for 'hr.base-url'"
+  }
+]}

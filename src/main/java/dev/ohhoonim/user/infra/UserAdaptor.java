@@ -123,7 +123,7 @@ public class UserAdaptor implements UserPort, PendingChangePort {
         Integer totalCount = userMapper.findUsersTotal(condition.getReq());
         if (totalCount > 0) {
             List<User> users = userMapper.findUsers(condition.getReq(), reqPage);
-            Id lastSeenKey = users.stream().reduce((f, s) -> s).map(s -> s.getUserId())
+            Id lastSeenKey = users.stream().reduce((_, s) -> s).map(s -> s.getUserId())
                     .orElseGet(() -> null);
             return new Vo(users, new Page(totalCount, reqPage.limit(), lastSeenKey));
         }

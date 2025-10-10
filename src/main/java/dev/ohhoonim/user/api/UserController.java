@@ -3,7 +3,6 @@ package dev.ohhoonim.user.api;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +28,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/withdrawUser")
-    public void withdrawUser(@RequestBody @NonNull User user) {
+    public void withdrawUser(@RequestBody User user) {
         userService.withdrawUser(user);
     }
 
     @GetMapping("/users")
-    public Vo<List<User>> users(@RequestBody @NonNull Search<UserReq> condition) {
+    public Vo<List<User>> users(@RequestBody Search<UserReq> condition) {
         return userService.users(condition);
     }
 
@@ -44,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/verifyPassword")
-    public boolean verifyPassword(@RequestBody @NonNull UserReq user) {
+    public boolean verifyPassword(@RequestBody UserReq user) {
         if (!StringUtils.hasText(user.getPassword())) {
             throw new RuntimeException("패스워드를 입력해주세요");
         }
@@ -53,7 +52,7 @@ public class UserController {
     }
 
     @PostMapping("/resetPassword")
-    public void resetPassword(@RequestBody @NonNull UserReq user) {
+    public void resetPassword(@RequestBody UserReq user) {
         if (!StringUtils.hasText(user.getPassword()) ||
                 !StringUtils.hasText(user.getNewPassword())) {
             throw new RuntimeException("패스워드를 입력해주세요");
@@ -65,12 +64,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody @NonNull User user) {
+    public void register(@RequestBody User user) {
         userService.register(user);
     }
 
     @PostMapping("/modifyInfo")
-    public void modifyInfo(@RequestBody @NonNull User userInfo) {
+    public void modifyInfo(@RequestBody User userInfo) {
         userService.modifyInfo(userInfo);
     }
 
@@ -84,20 +83,20 @@ public class UserController {
     }
 
     @PostMapping("/modifyLock")
-    public UserLockStatus modifyLock(@RequestBody @NonNull UserReq userReq ) {
+    public UserLockStatus modifyLock(@RequestBody UserReq userReq) {
         return userService.modifyLock(
-                new User(userReq.getUsername()), 
-                userReq.getLocked(), 
+                new User(userReq.getUsername()),
+                userReq.getLocked(),
                 userReq.getEffectiveDate());
     }
 
     @PostMapping("/dormantUser")
-    public void dormantUser(@RequestBody @NonNull UserReq userReq) {
+    public void dormantUser(@RequestBody UserReq userReq) {
         userService.dormantUser(new User(userReq.getUsername()));
     }
 
     @PostMapping("/increaseFailedAttemptCount")
-    public int increaseFailedAttemptCount(@RequestBody @NonNull UserReq userReq) {
+    public int increaseFailedAttemptCount(@RequestBody UserReq userReq) {
         if (userReq.getIsInit() == null) {
             throw new RuntimeException("초기화 여부를 지정해주세요");
         }
@@ -106,19 +105,19 @@ public class UserController {
     }
 
     @PostMapping("/lastLogin")
-    public LocalDateTime lastLogin(@RequestBody @NonNull UserReq userReq) {
+    public LocalDateTime lastLogin(@RequestBody UserReq userReq) {
         return userService.lastLogin(new User(userReq.getUsername()));
     }
 
     @PostMapping("/batchDormantUser")
-    public void batchDormantUser(@RequestBody @NonNull List<User> users) {
+    public void batchDormantUser(@RequestBody List<User> users) {
         userService.batchDormantUser(users);
     }
 
     @PostMapping("/modifyActivate")
     public UserEnableStatus modifyActivate(@RequestBody UserReq userReq) {
         return userService.modifyActivate(
-                new User(userReq.getUsername()), 
+                new User(userReq.getUsername()),
                 userReq.getEnabled());
     }
 }
